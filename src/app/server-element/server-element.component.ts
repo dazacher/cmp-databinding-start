@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -8,6 +8,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, DoCheck, AfterConte
 export class ServerElementComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
   @Input('srvElement') element: {type: string, name: string, content:string};
   @ViewChild('heading', {static: true}) header: ElementRef;
+  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef;
 
   constructor() { 
     console.log('Constructor Called');
@@ -21,6 +22,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
   ngOnInit(): void {
     console.log("ngOnInit called!");
     console.log("Text Content: " + this.header.nativeElement.textContent);
+    console.log("Text Content of paragraph: " + this.paragraph.nativeElement.textContent);
   }
 
   ngDoCheck() {
@@ -29,6 +31,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
 
   ngAfterContentInit() {
     console.log("ngAfterContentInit called!");
+    console.log("Text Content of paragraph: " + this.paragraph.nativeElement.textContent);
   }
 
   ngAfterContentChecked() {
